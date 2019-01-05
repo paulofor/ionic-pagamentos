@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { IonicPageModule } from 'ionic-angular';
-import { EditaCartaoPage } from './edita-cartao';
+import EditaCartaoPage from './edita-cartao';
 
 @NgModule({
   declarations: [

@@ -13,6 +13,25 @@
 </ion-header>
 
 
-<ion-content padding>
+<ion-content *ngIf="item" padding>
+  <form (ngSubmit)="onSubmit()">
+    <ion-item>
+      <ion-label floating>Username</ion-label>
+      <ion-input type="text"  [(ngModel)]="item.usuario" name="usuario" ></ion-input>
+    </ion-item>
 
+    <button ion-button full color="primary" style="margin-top: 20px;" type="submit">Enviar</button>
+  </form>
+
+  <ion-card>
+
+    <ion-card-header>
+      Resposta
+    </ion-card-header>
+  
+    <ion-card-content>
+      {{resposta}}
+    </ion-card-content>
+  
+  </ion-card>
 </ion-content>
