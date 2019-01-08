@@ -1,7 +1,0 @@
-{
-  "name": "ExemploPayPal",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}
