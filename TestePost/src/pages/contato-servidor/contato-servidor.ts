@@ -1,6 +1,6 @@
 import { Component } from '@angular/core';
 import { IonicPage, NavController, NavParams } from 'ionic-angular';
-
+import { HTTP } from '@ionic-native/http';
 /**
  * Generated class for the ContatoServidorPage page.
  *
@@ -15,11 +15,26 @@ import { IonicPage, NavController, NavParams } from 'ionic-angular';
 })
 export class ContatoServidorPage {
 
-  constructor(public navCtrl: NavController, public navParams: NavParams) {
+  constructor(public navCtrl: NavController, public navParams: NavParams, private http: HTTP) {
   }
 
   ionViewDidLoad() {
     console.log('ionViewDidLoad ContatoServidorPage');
+  }
+
+  chamaPost() {
+    this.http.get('http://postman-echo.com', {}, {})
+      .then(data => {
+        console.log('sucesso');
+        console.log(data.status);
+        console.log(data.data); // data received by server
+        console.log(data.headers);
+
+      })
+      .catch(error => {
+        console.log('Erro: ' , error);
+
+      });
   }
 
 }
