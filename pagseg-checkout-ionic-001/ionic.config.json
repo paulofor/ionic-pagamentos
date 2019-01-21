@@ -1,5 +1,6 @@
 {
   "name": "pagseg-checkout-ionic-001",
-  "integrations": {},
-  "type": "ionic-angular"
+  "app_id": "",
+  "type": "ionic-angular",
+  "integrations": {}
 }
