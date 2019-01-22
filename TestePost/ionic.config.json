@@ -1,7 +1,0 @@
-{
-  "name": "TestePost",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}

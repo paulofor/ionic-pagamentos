@@ -1,7 +1,0 @@
-{
-  "name": "TesteMercadoPago",
-  "integrations": {
-    "cordova": {}
-  },
-  "type": "ionic-angular"
-}
