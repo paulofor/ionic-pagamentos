@@ -9,7 +9,7 @@ import { PagseguroPgtoServiceProvider } from '../../providers/pagseguro-pgto-ser
 export class HomePage {
 
   constructor(public navCtrl: NavController, private pagseg: PagseguroPgtoServiceProvider) {
-    this.pagseg.iniciar("seu e-mail pagseguro", "token sandbox", true);
+    this.pagseg.iniciar("paulofore@gmail.com", "CB4CBC8D23374F219598172EF26BEC37", true);
 
   }
 
