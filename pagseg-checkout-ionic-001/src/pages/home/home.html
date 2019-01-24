@@ -8,7 +8,7 @@
   <ion-list>
     <ion-item>
       <ion-label stacked>Número Cartão</ion-label>
-      <ion-input (blur)="pagseg.buscaBandeira()" type="text" name="numCard" [(ngModel)]="pagseg.dados.numCard"  #numCard="ngModel"></ion-input>
+      <ion-input (ionBlur)="pagseg.buscaBandeira()" type="text" name="numCard" [(ngModel)]="pagseg.dados.numCard"  #numCard="ngModel"></ion-input>
     </ion-item>
 
     <ion-item>

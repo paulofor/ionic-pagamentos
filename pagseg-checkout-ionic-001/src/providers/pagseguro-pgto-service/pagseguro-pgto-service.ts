@@ -65,13 +65,20 @@ export class PagseguroPgtoServiceProvider {
       let headers = new Headers({ 'Content-Type': 'application/json' });
       let options = new RequestOptions({ headers: headers });
       let idSession = "";
-      this.http.post(this.credencial.urlSession, {}, options).subscribe(data => {
+      console.log('URL: ' , this.credencial.urlSession);
+      console.log('option: ' , JSON.stringify(options));
+      this.http.post(this.credencial.urlSession, {}, options).subscribe(
+        (data) => {
+        console.log('Resultado post: ' , JSON.stringify(data));
         xml2js.parseString(data["_body"], function (err, result) {
           idSession = JSON.stringify(result.session.id).replace(/[^a-zA-Z0-9_-]/g, '');
         });
         this.credencial.idSession = idSession;
         console.log('IdSessao: ' , idSession);
-      });
+        },
+        (error) => {
+          console.log('Erro post: ' , JSON.stringify(error));
+        });
     }).then(() => {
       return Promise.resolve(this.credencial);
     }).catch((erro) => {
