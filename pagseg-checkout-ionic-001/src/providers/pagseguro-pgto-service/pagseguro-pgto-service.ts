@@ -53,6 +53,7 @@ export class PagseguroPgtoServiceProvider {
   // ESTE É UM ID QUE É GERADO PELA API DO PAGSEGURO PARA FAZER O 
   // CONSUMO PARA CONCRETIZAR A TRANSAÇÃO
   private getSession(email, token) { 
+    console.log('Criando sessao');
     return new Promise((resolve) => {
       resolve();
       let headers = new Headers({ 'Content-Type': 'application/json' });
@@ -114,6 +115,7 @@ export class PagseguroPgtoServiceProvider {
   // INICIA OS PROCESSOS PARA QUE SEJA REALIZADO O PAGAMENTO
   // AO CLICAR NO BOTÃO PAGAR
   pagar() { 
+    console.log('comecou o pagar');
     
     //BUSCA O HASH DO COMPRADOR JUNTO A API DO PAGSEGURO
     this.dados.hashComprador = PagSeguroDirectPayment.getSenderHash();
@@ -128,6 +130,7 @@ export class PagseguroPgtoServiceProvider {
       brand: this.dados.bandCard,
       success: response => {
 
+        console.log('Sucesso cria CardToken');
         this.dados.hashCard = response.card.token;
         console.log(this.dados);
 
@@ -136,7 +139,10 @@ export class PagseguroPgtoServiceProvider {
         this.enviaDadosParaServidor();
 
       },
-      error: response => { console.log(response) }
+      error: response => { 
+        console.log('Fracasso cria CardToken');
+        console.log(JSON.stringify(response));
+      }
     });
 
   }
