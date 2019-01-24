@@ -63,7 +63,7 @@ var TabsPage = /** @class */ (function () {
         this.tab3Root = __WEBPACK_IMPORTED_MODULE_2__contact_contact__["a" /* ContactPage */];
     }
     TabsPage = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/usuario/aplicacoes/ionic/ionic-pagamentos/pagseg-checkout-ionic-001/src/pages/tabs/tabs.html"*/'<ion-tabs>\n  <ion-tab [root]="tab1Root" tabTitle="Carrinho" tabIcon="cart"></ion-tab>\n  <ion-tab [root]="tab2Root" tabTitle="Sobre" tabIcon="information-circle"></ion-tab>\n  <ion-tab [root]="tab3Root" tabTitle="Contato" tabIcon="contacts"></ion-tab>\n</ion-tabs>\n'/*ion-inline-end:"/home/usuario/aplicacoes/ionic/ionic-pagamentos/pagseg-checkout-ionic-001/src/pages/tabs/tabs.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Aplicacoes\ionic\ionic-pagamentos\pagseg-checkout-ionic-001\src\pages\tabs\tabs.html"*/'<ion-tabs>\n\n  <ion-tab [root]="tab1Root" tabTitle="Carrinho" tabIcon="cart"></ion-tab>\n\n  <ion-tab [root]="tab2Root" tabTitle="Sobre" tabIcon="information-circle"></ion-tab>\n\n  <ion-tab [root]="tab3Root" tabTitle="Contato" tabIcon="contacts"></ion-tab>\n\n</ion-tabs>\n\n'/*ion-inline-end:"C:\Aplicacoes\ionic\ionic-pagamentos\pagseg-checkout-ionic-001\src\pages\tabs\tabs.html"*/
         }),
         __metadata("design:paramtypes", [])
     ], TabsPage);
@@ -98,7 +98,7 @@ var AboutPage = /** @class */ (function () {
     }
     AboutPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-about',template:/*ion-inline-start:"/home/usuario/aplicacoes/ionic/ionic-pagamentos/pagseg-checkout-ionic-001/src/pages/about/about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      About\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"/home/usuario/aplicacoes/ionic/ionic-pagamentos/pagseg-checkout-ionic-001/src/pages/about/about.html"*/
+            selector: 'page-about',template:/*ion-inline-start:"C:\Aplicacoes\ionic\ionic-pagamentos\pagseg-checkout-ionic-001\src\pages\about\about.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      About\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n\n</ion-content>\n'/*ion-inline-end:"C:\Aplicacoes\ionic\ionic-pagamentos\pagseg-checkout-ionic-001\src\pages\about\about.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
     ], AboutPage);
@@ -133,7 +133,7 @@ var ContactPage = /** @class */ (function () {
     }
     ContactPage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-contact',template:/*ion-inline-start:"/home/usuario/aplicacoes/ionic/ionic-pagamentos/pagseg-checkout-ionic-001/src/pages/contact/contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n    <ion-item>\n      <ion-icon name="ionic" item-start></ion-icon>\n      @ionicframework\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"/home/usuario/aplicacoes/ionic/ionic-pagamentos/pagseg-checkout-ionic-001/src/pages/contact/contact.html"*/
+            selector: 'page-contact',template:/*ion-inline-start:"C:\Aplicacoes\ionic\ionic-pagamentos\pagseg-checkout-ionic-001\src\pages\contact\contact.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>\n      Contact\n    </ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content>\n  <ion-list>\n    <ion-list-header>Follow us on Twitter</ion-list-header>\n    <ion-item>\n      <ion-icon name="ionic" item-start></ion-icon>\n      @ionicframework\n    </ion-item>\n  </ion-list>\n</ion-content>\n'/*ion-inline-end:"C:\Aplicacoes\ionic\ionic-pagamentos\pagseg-checkout-ionic-001\src\pages\contact\contact.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */]])
     ], ContactPage);
@@ -172,7 +172,7 @@ var HomePage = /** @class */ (function () {
     }
     HomePage = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({
-            selector: 'page-home',template:/*ion-inline-start:"/home/usuario/aplicacoes/ionic/ionic-pagamentos/pagseg-checkout-ionic-001/src/pages/home/home.html"*/'<ion-header>\n  <ion-navbar>\n    <ion-title>Carrinho</ion-title>\n  </ion-navbar>\n</ion-header>\n\n<ion-content padding>\n  <ion-list>\n    <ion-item>\n      <ion-label stacked>Nome</ion-label>\n      <ion-input (blur)="pagseg.buscaBandeira()" type="text" name="numCard" [(ngModel)]="pagseg.dados.numCard"  #numCard="ngModel"></ion-input>\n    </ion-item>\n\n    <ion-item>\n      <ion-label stacked>Validade Cartão (MM)</ion-label>\n      <ion-input type="number" name="mesValidadeCard" [(ngModel)]="pagseg.dados.mesValidadeCard" #mesValidadeCard="ngModel"></ion-input>\n    </ion-item>    \n\n    <ion-item>\n      <ion-label stacked>Validade Cartão (AA)</ion-label>\n      <ion-input type="number" name="anoValidadeCard" [(ngModel)]="pagseg.dados.anoValidadeCard" #anoValidadeCard="ngModel"></ion-input>\n    </ion-item>  \n    \n    <ion-item>\n      <ion-label stacked>Cod Segurança</ion-label>\n      <ion-input type="number" name="codSegCard" [(ngModel)]="pagseg.dados.codSegCard" #codSegCard="ngModel"></ion-input>\n    </ion-item>     \n\n    <ion-item>\n      <ion-label stacked>Nome</ion-label>\n      <ion-input type="text" name="nome" [(ngModel)]="pagseg.dados.nome" #nome="ngModel"></ion-input>\n    </ion-item>     \n\n    <ion-item>\n      <ion-label stacked>CPF</ion-label>\n      <ion-input type="text" name="cpf" [(ngModel)]="pagseg.dados.cpf" #cpf="ngModel"></ion-input>\n    </ion-item>       \n    \n    <ion-item>\n      <ion-label stacked>Data Nascimento</ion-label>\n      <ion-input type="text" name="nascimento" [(ngModel)]="pagseg.dados.nascimento" #nascimento="ngModel"></ion-input>\n    </ion-item> \n\n    <ion-item>\n      <ion-label stacked>Telegone (DD) 123456789</ion-label>\n      <ion-input type="text" name="telefone" [(ngModel)]="pagseg.dados.telefone" #telefone="ngModel"></ion-input>\n    </ion-item>     \n\n    <ion-item>\n      <ion-label stacked>Email</ion-label>\n      <ion-input type="email" name="email" [(ngModel)]="pagseg.dados.email" #email="ngModel"></ion-input>\n    </ion-item>    \n    \n    <ion-item>\n      <ion-label stacked>Endereço</ion-label>\n      <ion-input type="text" name="logradouro" [(ngModel)]="pagseg.dados.logradouro" #logradouro="ngModel"></ion-input>\n    </ion-item>     \n\n    <ion-item>\n      <ion-label stacked>Número</ion-label>\n      <ion-input type="text" name="numero" [(ngModel)]="pagseg.dados.numero" #numero="ngModel"></ion-input>\n    </ion-item>    \n\n    <ion-item>\n      <ion-label stacked>Bairro</ion-label>\n      <ion-input type="text" name="bairro" [(ngModel)]="pagseg.dados.bairro" #bairro="ngModel"></ion-input>\n    </ion-item>       \n\n    <ion-item>\n      <ion-label stacked>CEP</ion-label>\n      <ion-input type="text" name="cep" [(ngModel)]="pagseg.dados.cep" #cep="ngModel"></ion-input>\n    </ion-item>     \n    \n    <ion-item>\n      <ion-label stacked>Estado</ion-label>\n      <ion-input type="text" name="estado" [(ngModel)]="pagseg.dados.estado" #estado="ngModel"></ion-input>\n    </ion-item>      \n\n    <ion-item>\n      <ion-label stacked>Cidade</ion-label>\n      <ion-input type="text" name="cidade" [(ngModel)]="pagseg.dados.cidade" #cidade="ngModel"></ion-input>\n    </ion-item>    \n    \n    <ion-item>\n      <ion-label stacked>Parcela</ion-label>\n      <ion-select [(ngModel)]="pagseg.dados.parcelas" name="parcelas" #parcelas="ngModel">\n        <ion-option *ngFor="let p of pagseg.dados.parcelas" [value]="[{ quantity: p[\'quantity\'], installmentAmount: p[\'installmentAmount\'] }]">\n          {{ p[\'quantity\'] + "X " + p[\'installmentAmount\'] }}\n        </ion-option>\n    </ion-select>    \n         \n    </ion-item>   \n\n  </ion-list>\n\n  <button ion-button block (click)="pagseg.pagar()">Salvar</button>\n\n</ion-content>\n'/*ion-inline-end:"/home/usuario/aplicacoes/ionic/ionic-pagamentos/pagseg-checkout-ionic-001/src/pages/home/home.html"*/
+            selector: 'page-home',template:/*ion-inline-start:"C:\Aplicacoes\ionic\ionic-pagamentos\pagseg-checkout-ionic-001\src\pages\home\home.html"*/'<ion-header>\n\n  <ion-navbar>\n\n    <ion-title>Carrinho</ion-title>\n\n  </ion-navbar>\n\n</ion-header>\n\n\n\n<ion-content padding>\n\n  <ion-list>\n\n    <ion-item>\n\n      <ion-label stacked>Número Cartão</ion-label>\n\n      <ion-input (blur)="pagseg.buscaBandeira()" type="text" name="numCard" [(ngModel)]="pagseg.dados.numCard"  #numCard="ngModel"></ion-input>\n\n    </ion-item>\n\n\n\n    <ion-item>\n\n      <ion-label stacked>Validade Cartão (MM)</ion-label>\n\n      <ion-input type="number" name="mesValidadeCard" [(ngModel)]="pagseg.dados.mesValidadeCard" #mesValidadeCard="ngModel"></ion-input>\n\n    </ion-item>    \n\n\n\n    <ion-item>\n\n      <ion-label stacked>Validade Cartão (AA)</ion-label>\n\n      <ion-input type="number" name="anoValidadeCard" [(ngModel)]="pagseg.dados.anoValidadeCard" #anoValidadeCard="ngModel"></ion-input>\n\n    </ion-item>  \n\n    \n\n    <ion-item>\n\n      <ion-label stacked>Cod Segurança</ion-label>\n\n      <ion-input type="number" name="codSegCard" [(ngModel)]="pagseg.dados.codSegCard" #codSegCard="ngModel"></ion-input>\n\n    </ion-item>     \n\n\n\n    <ion-item>\n\n      <ion-label stacked>Nome</ion-label>\n\n      <ion-input type="text" name="nome" [(ngModel)]="pagseg.dados.nome" #nome="ngModel"></ion-input>\n\n    </ion-item>     \n\n\n\n    <ion-item>\n\n      <ion-label stacked>CPF</ion-label>\n\n      <ion-input type="text" name="cpf" [(ngModel)]="pagseg.dados.cpf" #cpf="ngModel"></ion-input>\n\n    </ion-item>       \n\n    \n\n    <ion-item>\n\n      <ion-label stacked>Data Nascimento</ion-label>\n\n      <ion-input type="text" name="nascimento" [(ngModel)]="pagseg.dados.nascimento" #nascimento="ngModel"></ion-input>\n\n    </ion-item> \n\n\n\n    <ion-item>\n\n      <ion-label stacked>Telegone (DD) 123456789</ion-label>\n\n      <ion-input type="text" name="telefone" [(ngModel)]="pagseg.dados.telefone" #telefone="ngModel"></ion-input>\n\n    </ion-item>     \n\n\n\n    <ion-item>\n\n      <ion-label stacked>Email</ion-label>\n\n      <ion-input type="email" name="email" [(ngModel)]="pagseg.dados.email" #email="ngModel"></ion-input>\n\n    </ion-item>    \n\n    \n\n    <ion-item>\n\n      <ion-label stacked>Endereço</ion-label>\n\n      <ion-input type="text" name="logradouro" [(ngModel)]="pagseg.dados.logradouro" #logradouro="ngModel"></ion-input>\n\n    </ion-item>     \n\n\n\n    <ion-item>\n\n      <ion-label stacked>Número</ion-label>\n\n      <ion-input type="text" name="numero" [(ngModel)]="pagseg.dados.numero" #numero="ngModel"></ion-input>\n\n    </ion-item>    \n\n\n\n    <ion-item>\n\n      <ion-label stacked>Bairro</ion-label>\n\n      <ion-input type="text" name="bairro" [(ngModel)]="pagseg.dados.bairro" #bairro="ngModel"></ion-input>\n\n    </ion-item>       \n\n\n\n    <ion-item>\n\n      <ion-label stacked>CEP</ion-label>\n\n      <ion-input type="text" name="cep" [(ngModel)]="pagseg.dados.cep" #cep="ngModel"></ion-input>\n\n    </ion-item>     \n\n    \n\n    <ion-item>\n\n      <ion-label stacked>Estado</ion-label>\n\n      <ion-input type="text" name="estado" [(ngModel)]="pagseg.dados.estado" #estado="ngModel"></ion-input>\n\n    </ion-item>      \n\n\n\n    <ion-item>\n\n      <ion-label stacked>Cidade</ion-label>\n\n      <ion-input type="text" name="cidade" [(ngModel)]="pagseg.dados.cidade" #cidade="ngModel"></ion-input>\n\n    </ion-item>    \n\n    \n\n    <ion-item>\n\n      <ion-label stacked>Parcela</ion-label>\n\n      <ion-select [(ngModel)]="pagseg.dados.parcelas" name="parcelas" #parcelas="ngModel">\n\n        <ion-option *ngFor="let p of pagseg.dados.parcelas" [value]="[{ quantity: p[\'quantity\'], installmentAmount: p[\'installmentAmount\'] }]">\n\n          {{ p[\'quantity\'] + "X " + p[\'installmentAmount\'] }}\n\n        </ion-option>\n\n    </ion-select>    \n\n         \n\n    </ion-item>   \n\n\n\n  </ion-list>\n\n\n\n  <button ion-button block (click)="pagseg.pagar()">Salvar</button>\n\n\n\n</ion-content>\n\n'/*ion-inline-end:"C:\Aplicacoes\ionic\ionic-pagamentos\pagseg-checkout-ionic-001\src\pages\home\home.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["d" /* NavController */], __WEBPACK_IMPORTED_MODULE_2__providers_pagseguro_pgto_service_pagseguro_pgto_service__["a" /* PagseguroPgtoServiceProvider */]])
     ], HomePage);
@@ -242,12 +242,17 @@ var PagseguroPgtoServiceProvider = /** @class */ (function () {
         this.credencial.email = email;
         this.credencial.token = token;
         this.credencial.isSandBox = isSandBox;
+        console.log('Credencial: ', JSON.stringify(this.credencial));
         if (!this.varGlobais.getStatusScript()) {
-            this.getSession(email, token).then(function () {
+            this.getSession(email, token)
+                .then(function () {
                 _this.carregaPagSeguroDirectPayment().then(function () {
                     PagSeguroDirectPayment.setSessionId(_this.credencial.idSession);
                     _this.storage.set('credencial', _this.credencial);
                     console.log(PagSeguroDirectPayment);
+                })
+                    .catch(function (erro) {
+                    console.log('Erro do carregaPagSeguroDirectPayment: ', erro);
                 });
             });
         }
@@ -271,6 +276,8 @@ var PagseguroPgtoServiceProvider = /** @class */ (function () {
             });
         }).then(function () {
             return Promise.resolve(_this.credencial);
+        }).catch(function (erro) {
+            console.log('Erro get IdSession : ', erro);
         });
     };
     // CARREGA O JAVASCRIPT DO PAGSEGURO PARA NOSSA VARIÁVEL 
@@ -288,6 +295,8 @@ var PagseguroPgtoServiceProvider = /** @class */ (function () {
     // ESTA FUNÇÃO É CHAMADA QUANDO O INPUT QUE RECEBE O NÚMERO DO CARTÃO PERDE O FOCO;
     PagseguroPgtoServiceProvider.prototype.buscaBandeira = function () {
         var _this = this;
+        console.log('Chamou o busca bandeira');
+        console.log('SessaoId: ', this.credencial.idSession);
         PagSeguroDirectPayment.setSessionId(this.credencial.idSession);
         PagSeguroDirectPayment.getBrand({
             cardBin: this.dados.numCard,
@@ -297,7 +306,9 @@ var PagseguroPgtoServiceProvider = /** @class */ (function () {
                 _this.buscaParcelas();
                 console.log('Bandeira do cartão: ' + _this.dados.bandCard);
             },
-            error: function (response) { console.log('buscaBandeira', response); }
+            error: function (response) {
+                console.log('Erro buscaBandeira', JSON.stringify(response));
+            }
         });
     };
     // VERIFICA QUAL BANDEIRA FOI INFORMADA PELO CLIENTE AO DIGITAR OS DADOS DO CARTÃO E RETORNA AS 
@@ -413,10 +424,10 @@ var PagseguroPgtoServiceProvider = /** @class */ (function () {
     };
     PagseguroPgtoServiceProvider = __decorate([
         Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["A" /* Injectable */])(),
-        __metadata("design:paramtypes", [typeof (_a = typeof __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */]) === "function" && _a || Object, typeof (_b = typeof __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */]) === "function" && _b || Object, typeof (_c = typeof __WEBPACK_IMPORTED_MODULE_2__angular_common__["d" /* DatePipe */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_2__angular_common__["d" /* DatePipe */]) === "function" && _c || Object, typeof (_d = typeof __WEBPACK_IMPORTED_MODULE_4__var_global_var_global__["a" /* VarGlobalProvider */] !== "undefined" && __WEBPACK_IMPORTED_MODULE_4__var_global_var_global__["a" /* VarGlobalProvider */]) === "function" && _d || Object])
+        __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_3__angular_http__["b" /* Http */], __WEBPACK_IMPORTED_MODULE_1__ionic_storage__["b" /* Storage */], __WEBPACK_IMPORTED_MODULE_2__angular_common__["d" /* DatePipe */],
+            __WEBPACK_IMPORTED_MODULE_4__var_global_var_global__["a" /* VarGlobalProvider */]])
     ], PagseguroPgtoServiceProvider);
     return PagseguroPgtoServiceProvider;
-    var _a, _b, _c, _d;
 }());
 
 // CLASSE PARA ARMAZENAR NOSSOS DADOS DE ACESSO A CONTA DO PAGSEGURO
@@ -626,7 +637,7 @@ var MyApp = /** @class */ (function () {
         });
     }
     MyApp = __decorate([
-        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"/home/usuario/aplicacoes/ionic/ionic-pagamentos/pagseg-checkout-ionic-001/src/app/app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"/home/usuario/aplicacoes/ionic/ionic-pagamentos/pagseg-checkout-ionic-001/src/app/app.html"*/
+        Object(__WEBPACK_IMPORTED_MODULE_0__angular_core__["m" /* Component */])({template:/*ion-inline-start:"C:\Aplicacoes\ionic\ionic-pagamentos\pagseg-checkout-ionic-001\src\app\app.html"*/'<ion-nav [root]="rootPage"></ion-nav>\n'/*ion-inline-end:"C:\Aplicacoes\ionic\ionic-pagamentos\pagseg-checkout-ionic-001\src\app\app.html"*/
         }),
         __metadata("design:paramtypes", [__WEBPACK_IMPORTED_MODULE_1_ionic_angular__["e" /* Platform */], __WEBPACK_IMPORTED_MODULE_2__ionic_native_status_bar__["a" /* StatusBar */], __WEBPACK_IMPORTED_MODULE_3__ionic_native_splash_screen__["a" /* SplashScreen */]])
     ], MyApp);

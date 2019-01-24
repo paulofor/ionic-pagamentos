@@ -38,12 +38,18 @@ export class PagseguroPgtoServiceProvider {
     this.credencial.token = token;
     this.credencial.isSandBox = isSandBox;
 
+    console.log('Credencial: ' , JSON.stringify(this.credencial));
+    
     if (!this.varGlobais.getStatusScript()) {
-      this.getSession(email, token).then(() => {
+      this.getSession(email, token)
+        .then(() => {
         this.carregaPagSeguroDirectPayment().then(() => {
           PagSeguroDirectPayment.setSessionId(this.credencial.idSession);
           this.storage.set('credencial', this.credencial);
           console.log(PagSeguroDirectPayment);
+        })
+        .catch((erro) => {
+           console.log('Erro do carregaPagSeguroDirectPayment: ' , erro) ;
         });
       });
     }
@@ -64,9 +70,12 @@ export class PagseguroPgtoServiceProvider {
           idSession = JSON.stringify(result.session.id).replace(/[^a-zA-Z0-9_-]/g, '');
         });
         this.credencial.idSession = idSession;
+        console.log('IdSessao: ' , idSession);
       });
     }).then(() => {
       return Promise.resolve(this.credencial);
+    }).catch((erro) => {
+      console.log('Erro get IdSession : ' , erro);
     });
   }
 
@@ -84,6 +93,8 @@ export class PagseguroPgtoServiceProvider {
   // BUSCA A BANDEIRA DO CARTÃO (EX: VISA, MASTERCARD ETC...) E DEPOIS BUSCA AS PARCELAS;
   // ESTA FUNÇÃO É CHAMADA QUANDO O INPUT QUE RECEBE O NÚMERO DO CARTÃO PERDE O FOCO;
   buscaBandeira() { 
+    console.log('Chamou o busca bandeira');
+    console.log('SessaoId: ' , this.credencial.idSession);
     PagSeguroDirectPayment.setSessionId(this.credencial.idSession);
     PagSeguroDirectPayment.getBrand({
       cardBin: this.dados.numCard,
@@ -93,7 +104,9 @@ export class PagseguroPgtoServiceProvider {
         this.buscaParcelas();
         console.log('Bandeira do cartão: ' + this.dados.bandCard);        
       },
-      error: response => { console.log('buscaBandeira', response); }
+      error: response => { 
+        console.log('Erro buscaBandeira', JSON.stringify(response)); 
+      }
     });
   }
 
