@@ -44,9 +44,10 @@ export class PagseguroPgtoServiceProvider {
       this.getSession(email, token)
         .then(() => {
         this.carregaPagSeguroDirectPayment().then(() => {
+          console.log('NumSessao: ' , this.credencial.idSession);
           PagSeguroDirectPayment.setSessionId(this.credencial.idSession);
           this.storage.set('credencial', this.credencial);
-          console.log(PagSeguroDirectPayment);
+          console.log(JSON.stringify(PagSeguroDirectPayment));
         })
         .catch((erro) => {
            console.log('Erro do carregaPagSeguroDirectPayment: ' , erro) ;
@@ -62,11 +63,12 @@ export class PagseguroPgtoServiceProvider {
     console.log('Criando sessao');
     return new Promise((resolve) => {
       resolve();
-      let headers = new Headers({ 'Content-Type': 'application/json' });
-      let options = new RequestOptions({ headers: headers });
+      let options = new RequestOptions();
+      options.headers.append('Content-Type','application/json');
       let idSession = "";
       console.log('URL: ' , this.credencial.urlSession);
       console.log('option: ' , JSON.stringify(options));
+    
       this.http.post(this.credencial.urlSession, {}, options).subscribe(
         (data) => {
         console.log('Resultado post: ' , JSON.stringify(data));

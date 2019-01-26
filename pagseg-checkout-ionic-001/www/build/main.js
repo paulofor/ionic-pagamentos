@@ -247,9 +247,10 @@ var PagseguroPgtoServiceProvider = /** @class */ (function () {
             this.getSession(email, token)
                 .then(function () {
                 _this.carregaPagSeguroDirectPayment().then(function () {
+                    console.log('NumSessao: ', _this.credencial.idSession);
                     PagSeguroDirectPayment.setSessionId(_this.credencial.idSession);
                     _this.storage.set('credencial', _this.credencial);
-                    console.log(PagSeguroDirectPayment);
+                    console.log(JSON.stringify(PagSeguroDirectPayment));
                 })
                     .catch(function (erro) {
                     console.log('Erro do carregaPagSeguroDirectPayment: ', erro);
@@ -265,8 +266,8 @@ var PagseguroPgtoServiceProvider = /** @class */ (function () {
         console.log('Criando sessao');
         return new Promise(function (resolve) {
             resolve();
-            var headers = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["a" /* Headers */]({ 'Content-Type': 'application/json' });
-            var options = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["d" /* RequestOptions */]({ headers: headers });
+            var options = new __WEBPACK_IMPORTED_MODULE_3__angular_http__["d" /* RequestOptions */]();
+            options.headers.append('Content-Type', 'application/json');
             var idSession = "";
             console.log('URL: ', _this.credencial.urlSession);
             console.log('option: ', JSON.stringify(options));
