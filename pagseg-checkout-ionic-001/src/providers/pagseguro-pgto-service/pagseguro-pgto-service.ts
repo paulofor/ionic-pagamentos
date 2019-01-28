@@ -5,21 +5,50 @@ import { Http, RequestOptions, Headers } from '@angular/http';
 import { VarGlobalProvider } from '../var-global/var-global';
 import 'rxjs/add/operator/map';
 import xml2js from 'xml2js';
+var request = require("request");
 
 declare var PagSeguroDirectPayment: any;
 
 @Injectable()
 export class PagseguroPgtoServiceProvider {
-  
+
   public credencial: Credencial;
   public dados = new Dados();
 
-  constructor(private http: Http, private storage: Storage, private datepipe: DatePipe, 
-              private varGlobais: VarGlobalProvider) {}
+  constructor(private http: Http, private storage: Storage, private datepipe: DatePipe,
+    private varGlobais: VarGlobalProvider) { }
+
+
+  testeConexao() {
+
+
+    var options = {
+      method: 'POST',
+      url: 'https://ws.sandbox.pagseguro.uol.com.br/v2/sessions',
+      qs:
+      {
+        email: 'paulofore@gmail.com',
+        token: 'CB4CBC8D23374F219598172EF26BEC37'
+      },
+      headers:
+      {
+        'Postman-Token': 'b4881880-138e-495d-808a-01eb47619697',
+        'Cache-Control': 'no-cache',
+        'Content-Type': 'application/json'
+      }
+    };
+
+    request(options, function (error, response, body) {
+      if (error) throw new Error(error);
+
+      console.log(body);
+    });
+
+  }
 
 
   // MÉTODO QUE DISPARA OUTROS MÉTODOS NECESSÁRIOS PARA A UTILIZAÇÃO DA API DO PAGSEGURO
-  iniciar(email, token, isSandBox) { 
+  iniciar(email, token, isSandBox) {
     this.credencial = new Credencial();
     this.dados = new Dados();
 
@@ -38,61 +67,59 @@ export class PagseguroPgtoServiceProvider {
     this.credencial.token = token;
     this.credencial.isSandBox = isSandBox;
 
-    console.log('Credencial: ' , JSON.stringify(this.credencial));
-    
+    console.log('Credencial: ', JSON.stringify(this.credencial));
+
     if (!this.varGlobais.getStatusScript()) {
       this.getSession(email, token)
         .then(() => {
-        this.carregaPagSeguroDirectPayment().then(() => {
-          console.log('NumSessao: ' , this.credencial.idSession);
-          PagSeguroDirectPayment.setSessionId(this.credencial.idSession);
-          this.storage.set('credencial', this.credencial);
-          console.log(JSON.stringify(PagSeguroDirectPayment));
-        })
-        .catch((erro) => {
-           console.log('Erro do carregaPagSeguroDirectPayment: ' , erro) ;
+          this.carregaPagSeguroDirectPayment().then(() => {
+            console.log('NumSessao: ', this.credencial.idSession);
+            PagSeguroDirectPayment.setSessionId(this.credencial.idSession);
+            this.storage.set('credencial', this.credencial);
+            console.log(JSON.stringify(PagSeguroDirectPayment));
+          })
+            .catch((erro) => {
+              console.log('Erro do carregaPagSeguroDirectPayment: ', erro);
+            });
         });
-      });
     }
   }
-  
+
   // RETORNA A SESSÃO QUE VAI SER UTILIZADA PELA API
   // ESTE É UM ID QUE É GERADO PELA API DO PAGSEGURO PARA FAZER O 
   // CONSUMO PARA CONCRETIZAR A TRANSAÇÃO
-  private getSession(email, token) { 
+  private getSession(email, token) {
     console.log('Criando sessao');
     return new Promise((resolve) => {
       resolve();
       let headers = new Headers({ 'Content-Type': 'application/json' });
-      headers.append("access-control-allow-origin" , "https://pagseguro.uol.com.br");
-      headers.append("access-control-allow-origin" , "https://sandbox.pagseguro.uol.com.br");
-      headers.append("access-control-allow-origin" , "https://dev.pagseguro.uol.com.br");
       let options = new RequestOptions({ headers: headers });
       let idSession = "";
-      console.log('URL: ' , this.credencial.urlSession);
-      console.log('option: ' , JSON.stringify(options));
-    
+      console.log('URL: ', this.credencial.urlSession);
+      console.log('option: ', JSON.stringify(options));
+
       this.http.post(this.credencial.urlSession, {}, options).subscribe(
         (data) => {
-        console.log('Resultado post: ' , JSON.stringify(data));
-        xml2js.parseString(data["_body"], function (err, result) {
-          idSession = JSON.stringify(result.session.id).replace(/[^a-zA-Z0-9_-]/g, '');
-        });
-        this.credencial.idSession = idSession;
-        console.log('IdSessao: ' , idSession);
+          console.log('Resultado post: ', JSON.stringify(data));
+          xml2js.parseString(data["_body"], function (err, result) {
+            idSession = JSON.stringify(result.session.id).replace(/[^a-zA-Z0-9_-]/g, '');
+          });
+          this.credencial.idSession = idSession;
+          console.log('IdSessao: ', idSession);
         },
         (error) => {
-          console.log('Erro post: ' , JSON.stringify(error));
+          console.log('Erro post: ', JSON.stringify(error));
         });
-    }).then(() => {
+    }).then((data) => {
+      console.log('data:', JSON.stringify(data));
       return Promise.resolve(this.credencial);
     }).catch((erro) => {
-      console.log('Erro get IdSession : ' , erro);
+      console.log('Erro get IdSession : ', erro);
     });
   }
 
   // CARREGA O JAVASCRIPT DO PAGSEGURO PARA NOSSA VARIÁVEL 
-  carregaPagSeguroDirectPayment() {  
+  carregaPagSeguroDirectPayment() {
     return new Promise((resolve) => {
       let script: HTMLScriptElement = document.createElement('script');
       script.addEventListener('load', r => resolve());
@@ -104,9 +131,9 @@ export class PagseguroPgtoServiceProvider {
   // RETORNA OS MEIOS DE PAGAMENTO DISPONÍVEIS NA CONTA PARA EXIBIÇÃO NO CHECKOUT
   // BUSCA A BANDEIRA DO CARTÃO (EX: VISA, MASTERCARD ETC...) E DEPOIS BUSCA AS PARCELAS;
   // ESTA FUNÇÃO É CHAMADA QUANDO O INPUT QUE RECEBE O NÚMERO DO CARTÃO PERDE O FOCO;
-  buscaBandeira() { 
+  buscaBandeira() {
     console.log('Chamou o busca bandeira');
-    console.log('SessaoId: ' , this.credencial.idSession);
+    console.log('SessaoId: ', this.credencial.idSession);
     PagSeguroDirectPayment.setSessionId(this.credencial.idSession);
     PagSeguroDirectPayment.getBrand({
       cardBin: this.dados.numCard,
@@ -114,17 +141,17 @@ export class PagseguroPgtoServiceProvider {
         console.log('numCard', this.dados.numCard);
         this.dados.bandCard = response.brand.name;
         this.buscaParcelas();
-        console.log('Bandeira do cartão: ' + this.dados.bandCard);        
+        console.log('Bandeira do cartão: ' + this.dados.bandCard);
       },
-      error: response => { 
-        console.log('Erro buscaBandeira', JSON.stringify(response)); 
+      error: response => {
+        console.log('Erro buscaBandeira', JSON.stringify(response));
       }
     });
   }
 
   // VERIFICA QUAL BANDEIRA FOI INFORMADA PELO CLIENTE AO DIGITAR OS DADOS DO CARTÃO E RETORNA AS 
   // PARCELAS DISPONPIVEIS E VAI BUSCAR AS PARCELAS NA API DO PAGSEGURO PARA O CLIENTE ESCOLHER  
-  buscaParcelas() { 
+  buscaParcelas() {
     PagSeguroDirectPayment.getInstallments({
       amount: '100',              //valor total da compra (deve ser informado)
       brand: this.dados.bandCard, //bandeira do cartão (capturado na função buscaBandeira)
@@ -139,15 +166,15 @@ export class PagseguroPgtoServiceProvider {
 
   // INICIA OS PROCESSOS PARA QUE SEJA REALIZADO O PAGAMENTO
   // AO CLICAR NO BOTÃO PAGAR
-  pagar() { 
+  pagar() {
     console.log('comecou o pagar');
-    
+
     //BUSCA O HASH DO COMPRADOR JUNTO A API DO PAGSEGURO
     this.dados.hashComprador = PagSeguroDirectPayment.getSenderHash();
 
     //CRIA O HASK DO CARTÃO DE CRÉDITO JUNTO A API DO PAGSEGURO
     PagSeguroDirectPayment.createCardToken({
-      
+
       cardNumber: this.dados.numCard,
       cvv: this.dados.codSegCard,
       expirationMonth: this.dados.mesValidadeCard,
@@ -164,7 +191,7 @@ export class PagseguroPgtoServiceProvider {
         this.enviaDadosParaServidor();
 
       },
-      error: response => { 
+      error: response => {
         console.log('Fracasso cria CardToken');
         console.log(JSON.stringify(response));
       }
@@ -173,79 +200,79 @@ export class PagseguroPgtoServiceProvider {
   }
 
   // DISPARA OUTROS MÉTODOS PARA PODER CONSUMIR A API DO PAGSEGURO E CONCRETIZAR A TRANSAÇÃO
-  enviaDadosParaServidor() {    
+  enviaDadosParaServidor() {
     this.pagarCheckoutTransp(this.dados).subscribe(result => console.log(result));
   }
 
   // MÉTODO INTERNO PARA MONTAR NOSSA URL QUE SERÁ USADA NO CONSUMO DA API PARA FAZER O PAGAMENTO
-  montaQryStr(dados:Dados) {
-    let url: string = ''+
-    'email='+this.credencial.email+
-    '&token='+this.credencial.token+
-    '&paymentMode=default'+
-    '&paymentMethod=creditCard'+
-    '&receiverEmail=suporte@loja.com.br'+
-    '&currency=BRL'+ 
-    '&extraAmount=1.00'+    /* <= especializar */  
-    '&itemId1=0001'+ /* <= especializar */ 
-    '&itemDescription1=Notebook Prata'+ /* <= especializar */ 
-    '&itemAmount1=24300.00'+ /* <= especializar */ 
-    '&itemQuantity1=1'+
-    '&notificationURL=https://sualoja.com.br/notifica.html'+
-    '&reference=REF1234'+
-    '&senderName=Jose Comprador'+
-    '&senderCPF='+dados.cpf+
-    '&senderAreaCode=11'
-    '&senderPhone='+dados.telefone+
-    '&senderEmail='+dados.email+
-    '&senderHash='+dados.hashComprador+
-    '&shippingAddressStreet='+dados.logradouro+
-    '&shippingAddressNumber='+dados.numero+
-    '&shippingAddressComplement=nd'+ /* <= especializar */ 
-    '&shippingAddressDistrict='+dados.bairro+
-    '&shippingAddressPostalCode='+dados.cep+
-    '&shippingAddressCity='+dados.cidade+
-    '&shippingAddressState='+dados.estado+
-    '&shippingAddressCountry=BRA'+
-    '&shippingType=1'+
-    '&shippingCost=1.00'+
-    '&creditCardToken='+dados.hashCard+
-    '&installmentQuantity=5'+ /* <= especializar */ 
-    '&installmentValue=125.22'+ /* <= especializar */ 
-    '&noInterestInstallmentQuantity=2'+ /* <= especializar */ 
-    '&creditCardHolderName='+dados.nome+ /* <= especializar */ 
-    '&creditCardHolderCPF='+dados.cpf+ /* <= especializar */ 
-    '&creditCardHolderBirthDate=27/10/1987'+ /* <= especializar */ 
-    '&creditCardHolderAreaCode=11'+ /* <= especializar */ 
-    '&creditCardHolderPhone=56273440'+ /* <= especializar */ 
-    '&billingAddressNumber=13840'+ /* <= especializar */ 
-    '&billingAddressComplement=5o andar'+ /* <= especializar */
-    '&billingAddressDistrict=Jardim Paulistano'+ /* <= especializar */
-    '&billingAddressPostalCode=01452002'+ /* <= especializar */
-    '&billingAddressCity=Sao Paulo'+ /* <= especializar */
-    '&billingAddressState=SP'+ /* <= especializar */
-    '&billingAddressCountry=BRA'; /* <= especializar */      
+  montaQryStr(dados: Dados) {
+    let url: string = '' +
+      'email=' + this.credencial.email +
+      '&token=' + this.credencial.token +
+      '&paymentMode=default' +
+      '&paymentMethod=creditCard' +
+      '&receiverEmail=suporte@loja.com.br' +
+      '&currency=BRL' +
+      '&extraAmount=1.00' +    /* <= especializar */
+      '&itemId1=0001' + /* <= especializar */
+      '&itemDescription1=Notebook Prata' + /* <= especializar */
+      '&itemAmount1=24300.00' + /* <= especializar */
+      '&itemQuantity1=1' +
+      '&notificationURL=https://sualoja.com.br/notifica.html' +
+      '&reference=REF1234' +
+      '&senderName=Jose Comprador' +
+      '&senderCPF=' + dados.cpf +
+      '&senderAreaCode=11'
+    '&senderPhone=' + dados.telefone +
+      '&senderEmail=' + dados.email +
+      '&senderHash=' + dados.hashComprador +
+      '&shippingAddressStreet=' + dados.logradouro +
+      '&shippingAddressNumber=' + dados.numero +
+      '&shippingAddressComplement=nd' + /* <= especializar */
+      '&shippingAddressDistrict=' + dados.bairro +
+      '&shippingAddressPostalCode=' + dados.cep +
+      '&shippingAddressCity=' + dados.cidade +
+      '&shippingAddressState=' + dados.estado +
+      '&shippingAddressCountry=BRA' +
+      '&shippingType=1' +
+      '&shippingCost=1.00' +
+      '&creditCardToken=' + dados.hashCard +
+      '&installmentQuantity=5' + /* <= especializar */
+      '&installmentValue=125.22' + /* <= especializar */
+      '&noInterestInstallmentQuantity=2' + /* <= especializar */
+      '&creditCardHolderName=' + dados.nome + /* <= especializar */
+      '&creditCardHolderCPF=' + dados.cpf + /* <= especializar */
+      '&creditCardHolderBirthDate=27/10/1987' + /* <= especializar */
+      '&creditCardHolderAreaCode=11' + /* <= especializar */
+      '&creditCardHolderPhone=56273440' + /* <= especializar */
+      '&billingAddressNumber=13840' + /* <= especializar */
+      '&billingAddressComplement=5o andar' + /* <= especializar */
+      '&billingAddressDistrict=Jardim Paulistano' + /* <= especializar */
+      '&billingAddressPostalCode=01452002' + /* <= especializar */
+      '&billingAddressCity=Sao Paulo' + /* <= especializar */
+      '&billingAddressState=SP' + /* <= especializar */
+      '&billingAddressCountry=BRA'; /* <= especializar */
     return url;
-  }  
-  
+  }
+
   // MÉTODO QUE FAZ O CONSUMO COM TODOS OS DADOS NECESSÁRIOS PELA API 
   // COM A FINALIDADE DE EFETUAR O PAGAMENTO
-  public pagarCheckoutTransp (dados:Dados){
+  public pagarCheckoutTransp(dados: Dados) {
 
     let headers = new Headers({ 'Content-Type': 'application/x-www-form-urlencoded; charset=ISO-8859-1' });
-    let options = new RequestOptions({ headers: headers });  
+    let options = new RequestOptions({ headers: headers });
 
     //console.log('params',meusParams);
-    let url = this.credencial.urlTransacao+
-               this.montaQryStr(dados);
+    let url = this.credencial.urlTransacao +
+      this.montaQryStr(dados);
 
-    console.log('url',url);               
+    console.log('url', url);
 
     let body = JSON.stringify({ dados });
     //console.log('body',body);
     return this.http.post(url, body, options)
-                    .map(res => res.json());
-  }  
+      .map(res => res.json());
+  }
 }
 
 // CLASSE PARA ARMAZENAR NOSSOS DADOS DE ACESSO A CONTA DO PAGSEGURO
