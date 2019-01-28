@@ -63,6 +63,9 @@ export class PagseguroPgtoServiceProvider {
     return new Promise((resolve) => {
       resolve();
       let headers = new Headers({ 'Content-Type': 'application/json' });
+      headers.append("access-control-allow-origin" , "https://pagseguro.uol.com.br");
+      headers.append("access-control-allow-origin" , "https://sandbox.pagseguro.uol.com.br");
+      headers.append("access-control-allow-origin" , "https://dev.pagseguro.uol.com.br");
       let options = new RequestOptions({ headers: headers });
       let idSession = "";
       console.log('URL: ' , this.credencial.urlSession);
