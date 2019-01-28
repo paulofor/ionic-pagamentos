@@ -247,9 +247,10 @@ var PagseguroPgtoServiceProvider = /** @class */ (function () {
             this.getSession(email, token)
                 .then(function () {
                 _this.carregaPagSeguroDirectPayment().then(function () {
+                    console.log('NumSessao: ', _this.credencial.idSession);
                     PagSeguroDirectPayment.setSessionId(_this.credencial.idSession);
                     _this.storage.set('credencial', _this.credencial);
-                    console.log(PagSeguroDirectPayment);
+                    console.log(JSON.stringify(PagSeguroDirectPayment));
                 })
                     .catch(function (erro) {
                     console.log('Erro do carregaPagSeguroDirectPayment: ', erro);
