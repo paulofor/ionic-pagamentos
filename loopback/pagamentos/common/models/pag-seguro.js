@@ -1,6 +1,7 @@
 'use strict';
 
 var pagseguro = require('pagseguro');
+var PagSeguro = require('node-pagseguro');
 
 module.exports = function (Pagseguro) {
 
@@ -11,8 +12,9 @@ module.exports = function (Pagseguro) {
     */
     Pagseguro.SolicitaPagamento = function (callback) {
         var pag = new pagseguro({
-            email: 'suporte@lojamodelo.com.br',
-            token: '95112EE828D94278BD394E91C4388F20'
+            email: 'paulofore@gmail.com',
+            token: 'CB4CBC8D23374F219598172EF26BEC37',
+            mode : 'sandbox'
         });
 
         //Configurando a moeda e a referência do pedido
